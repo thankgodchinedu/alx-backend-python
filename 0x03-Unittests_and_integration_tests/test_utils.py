@@ -25,8 +25,8 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
-        ({}, ("a",)),           # empty dict
-        ({"a": 1}, ("a", "b")), # trying to access a key of non-dict
+        ({}, ("a",)),            # empty dict
+        ({"a": 1}, ("a", "b")),  # trying to access a key of non-dict
     ])
     def test_access_nested_map_exception(self, nested_map, path):
         """Test access_nested_map raises KeyError or TypeError as expected"""
@@ -71,7 +71,9 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        with patch.object(TestClass, "a_method", return_value=42) as mock_method:
+        with patch.object(
+            TestClass, "a_method", return_value=42
+        ) as mock_method:
             obj = TestClass()
             # Access twice (not call)
             result1 = obj.a_property
@@ -80,7 +82,6 @@ class TestMemoize(unittest.TestCase):
             self.assertEqual(result1, 42)
             self.assertEqual(result2, 42)
             mock_method.assert_called_once()
-
 
 
 if __name__ == "__main__":
